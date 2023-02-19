@@ -1,8 +1,5 @@
 <template>
-  <div>
-    张三/李四
+  <NuxtLayout>
     <NuxtPage />
-
-
-  </div>
+  </NuxtLayout>
 </template>
