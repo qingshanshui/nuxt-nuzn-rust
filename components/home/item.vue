@@ -31,7 +31,8 @@
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
-        opacity: 0.7;
+        color: #000000;
+        font-weight: 500;
     }
 }
 
