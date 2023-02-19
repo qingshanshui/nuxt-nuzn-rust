@@ -34,6 +34,8 @@ const handelRoute = (id: any) => {
 
     .home-content-pagination {
         margin: 10px;
+        display: flex;
+        justify-content: center;
     }
 }
 </style>

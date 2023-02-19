@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
     ssr: true,
     css: ["~/assets/css/app.css"],
+    devServer: {
+        port: 8003,
+    },
     app: {
         head: {
             link: [{ rel: 'stylesheet', href: "https://pan.nuzn.cn/v1/download?path=/zui/1.10.0/css/zui.min.css" },
@@ -33,5 +36,6 @@ export default defineNuxtConfig({
                     ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
                     : []
         }
-    }
+    },
+
 })
