@@ -1,7 +1,9 @@
 <template>
     <div class="home">
         <div class="home-content">
-            <HomeItem v-for="i in 10" :key="i" @click="handelRoute(i)"></HomeItem>
+            <HomeItem :item="item" v-for="(item, index) in data.data.result" :key="index"
+                @click="handelRoute(item.article_uid)">
+            </HomeItem>
         </div>
         <div class="home-content-pagination">
             <NPagination :page-count="101" :page-slot="5">
@@ -13,12 +15,11 @@
 <script setup lang="ts">
 import { NPagination } from 'naive-ui'
 import { useRouter } from "#app"
+
 const router = useRouter()
-$fetch('/name', {
+const { data } = await useAsyncData('list', () => $fetch('https://rust.nuzn.cn/api/v1/article?size=10&page=1', {
     method: "GET"
-}).then(res => {
-    console.log(res, "---");
-})
+}))
 
 const handelRoute = (id: any) => {
     router.push(`articles/${id}`)

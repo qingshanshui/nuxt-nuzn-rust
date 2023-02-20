@@ -14,9 +14,8 @@
 <style lang="scss" scoped>
 .footer {
     padding: 30px 0;
-    background-color: #fff;
+    background-color: #ffffff;
     font-size: 12px;
-    opacity: 0.6;
 }
 </style>
   

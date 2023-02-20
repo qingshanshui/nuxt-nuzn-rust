@@ -4,12 +4,20 @@
             <img src="https://rust.nuzn.cn/logo.jpg" alt="rust">
         </div>
         <div class="home-item-title">
-            rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三rust核心库第三
+            {{ props.item.title }}
         </div>
         <div class="home-item-datetime">10月前</div>
     </div>
 </template>
 <script setup lang="ts">
+// props
+const props = defineProps({
+    item: {
+        type: Object,
+        default: {},
+    },
+
+})
 </script>
 <style scoped lang="scss">
 .home-item {
