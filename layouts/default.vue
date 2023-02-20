@@ -5,7 +5,9 @@
         <div class="container">
             <div class="main">
                 <div class="content">
-                    <slot />
+                    <NScrollbar style="height: calc(100vh - 210px)">
+                        <slot />
+                    </NScrollbar>
                 </div>
                 <div class="aside hidden-xs">
                     <Appaside />
@@ -15,7 +17,10 @@
         <Appfooter />
     </div>
 </template>
+<script setup lang="ts">
+import { NScrollbar } from 'naive-ui'
 
+</script>
 <style scoped>
 .main {
     display: flex;

@@ -6,7 +6,7 @@
         </div>
         <div class="home-content-pagination">
             <NPagination :item-count="homeList.data.total" :default-page="Number($route.query.page) || 1" :page-slot="5"
-                :on-update-page="updateChange" :page-sizes="[20]">
+                :on-update-page="updateChange" :page-sizes="[16]">
             </NPagination>
         </div>
     </div>
@@ -16,7 +16,7 @@
 import { NPagination } from 'naive-ui'
 const route = useRoute()
 
-let { data: homeList } = await useAsyncData((pagesize) => $fetch(`https://rust.nuzn.cn/api/v1/article?size=20&page=${route.query.page}`, {
+let { data: homeList } = await useAsyncData((pagesize) => $fetch(`https://rust.nuzn.cn/api/v1/article?size=16&page=${route.query.page}`, {
     method: "GET"
 }))
 

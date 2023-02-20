@@ -15,3 +15,12 @@ a,
 a:hover {
     text-decoration: none;
 }
+
+pre {
+
+    display: grid;
+}
+
+code {
+    overflow: auto;
+}
