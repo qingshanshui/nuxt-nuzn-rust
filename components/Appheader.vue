@@ -13,19 +13,19 @@
                 <NInput round placeholder="搜索" />
             </div>
             <div class="user ">
-                <NButton quaternary>
+                <a href="/auth/login">
                     登录
-                </NButton>
-                <NButton quaternary>
+                </a>
+                <a href="/auth/register">
                     注册
-                </NButton>
+                </a>
             </div>
         </div>
     </header>
 </template>
 
 <script setup lang="ts">
-import { NInput, NButton } from 'naive-ui'
+import { NInput } from 'naive-ui'
 
 </script>
   
@@ -48,7 +48,16 @@ import { NInput, NButton } from 'naive-ui'
     }
 
     .user {
+
         // width: 130px;
+        a {
+            padding-left: 10px;
+            color: #606266;
+        }
+
+        a:hover {
+            color: #e8e8e8;
+        }
     }
 }
 </style>

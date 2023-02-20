@@ -1,13 +1,15 @@
 <template>
-    <div class="home-item">
-        <div class="home-item-img">
-            <img src="https://rust.nuzn.cn/logo.jpg" alt="rust">
+    <a :href="`articles/${props.item.article_uid}`">
+        <div class="home-item">
+            <div class="home-item-img">
+                <img src="https://rust.nuzn.cn/logo.jpg" alt="rust">
+            </div>
+            <div class="home-item-title">
+                {{ props.item.title }}
+            </div>
+            <div class="home-item-datetime">10月前</div>
         </div>
-        <div class="home-item-title">
-            {{ props.item.title }}
-        </div>
-        <div class="home-item-datetime">10月前</div>
-    </div>
+    </a>
 </template>
 <script setup lang="ts">
 // props
@@ -21,6 +23,7 @@ const props = defineProps({
 </script>
 <style scoped lang="scss">
 .home-item {
+    color: rgba(0, 0, 0, 0.45);
     padding: 5px;
     transition: all .3s ease 0s;
     margin-top: 2px;

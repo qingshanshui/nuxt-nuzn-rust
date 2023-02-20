@@ -1,12 +1,12 @@
 <template>
     <div class="home">
         <div class="home-content">
-            <HomeItem :item="item" v-for="(item, index) in data.data.result" :key="index"
-                @click="handelRoute(item.article_uid)">
+            <HomeItem :item="item" v-for="(item, index) in homeList.data.result" :key="index">
             </HomeItem>
         </div>
         <div class="home-content-pagination">
-            <NPagination :page-count="101" :page-slot="5">
+            <NPagination :item-count="homeList.data.total" :default-page="Number($route.query.page) || 1" :page-slot="5"
+                :on-update-page="updateChange" :page-sizes="[20]">
             </NPagination>
         </div>
     </div>
@@ -14,16 +14,16 @@
  
 <script setup lang="ts">
 import { NPagination } from 'naive-ui'
-import { useRouter } from "#app"
+const route = useRoute()
 
-const router = useRouter()
-const { data } = await useAsyncData('list', () => $fetch('https://rust.nuzn.cn/api/v1/article?size=10&page=1', {
+let { data: homeList } = await useAsyncData((pagesize) => $fetch(`https://rust.nuzn.cn/api/v1/article?size=20&page=${route.query.page}`, {
     method: "GET"
 }))
 
-const handelRoute = (id: any) => {
-    router.push(`articles/${id}`)
+const updateChange = (page) => {
+    location.href = `?page=${page}`
 }
+
 </script>
 
 

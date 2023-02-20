@@ -24,7 +24,7 @@
 
     <!-- 留言列表 -->
     <div class="comment-list">
-        <h3 class="title">{{ `共 ${0} 条评论` }}</h3>
+        <h3 class="title">{{ `共 ${commentList.data.result.length} 条评论` }}</h3>
         <ul>
             <li v-for="(item, index) in commentList.data.result" :key="index">
                 <div class="image">
@@ -47,12 +47,12 @@
 <script setup lang="ts">
 const route = useRoute()
 // 详情
-const { data: article } = await useAsyncData('article', () => $fetch(`https://rust.nuzn.cn/api/v1/article/${route.params.id}`, {
+const { data: article } = await useAsyncData(() => $fetch(`https://rust.nuzn.cn/api/v1/article/${route.params.id}`, {
     method: "GET"
 }))
 // 评论
 
-const { data: commentList } = await useAsyncData('commentList', () => $fetch(`https://rust.nuzn.cn/api/v1/comment?articleID=${route.params.id}`, {
+const { data: commentList } = await useAsyncData(() => $fetch(`https://rust.nuzn.cn/api/v1/comment?articleID=${route.params.id}`, {
     method: "GET"
 }))
 
@@ -66,7 +66,7 @@ console.log(article);
     background-color: #fff;
     border-radius: 4px;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 
     .title {
         text-align: center;

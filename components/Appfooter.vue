@@ -2,7 +2,7 @@
     <footer class="footer">
         <div class="container mx-auto">
             <p>©2013-2022 Rust.com Rust语言中文网，中国 Rust 社区，致力于构建完善的 Rust 中文社区，Rust语言爱好者的学习家园。</p>
-            <p>Powered by dbsgw(Golang + MySQL) • · CDN 采用 七牛云</p>
+            <p>Powered by qingshanshui（Golang + MySQL）</p>
         </div>
     </footer>
 </template>
