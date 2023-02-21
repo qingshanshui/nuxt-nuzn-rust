@@ -8,11 +8,15 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "^3.2.2",
-    "prettier": "^2.8.4",
-    "sass": "^1.58.3",
     "@css-render/vue3-ssr": "^0.15.12",
     "@types/node": "^18.14.0",
-    "naive-ui": "^2.34.3"
+    "naive-ui": "^2.34.3",
+    "nuxt": "^3.2.2",
+    "prettier": "^2.8.4",
+    "sass": "^1.58.3"
+  },
+  "dependencies": {
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12"
   }
 }
