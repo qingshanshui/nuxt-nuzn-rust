@@ -7,6 +7,14 @@
     </div>
 </template>
 <script setup lang="ts">
+useHead(() => ({
+    link: [
+        { rel: 'stylesheet', href: "https://pan.nuzn.cn/v1/download?path=/wangeditor/5.1.23/css/style.css" }
+    ],
+    script: [
+        { type: 'text/javascript', src: 'https://pan.nuzn.cn/v1/download?path=/wangeditor/5.1.23/js/index.js' },
+    ],
+}))
 onMounted(() => {
 
     const { createEditor, createToolbar } = window.wangEditor
