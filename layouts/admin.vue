@@ -19,7 +19,14 @@
 </template>
 <script setup lang="ts">
 import { NScrollbar } from 'naive-ui'
-
+useHead(() => ({
+    link: [
+        { rel: 'stylesheet', href: "https://pan.nuzn.cn/v1/download?path=/wangeditor/5.1.23/css/style.css" }
+    ],
+    script: [
+        { type: 'text/javascript', src: 'https://pan.nuzn.cn/v1/download?path=/wangeditor/5.1.23/js/index.js' },
+    ],
+}))
 </script>
 <style scoped>
 .main {

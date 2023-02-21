@@ -16,6 +16,9 @@
     padding: 30px 0;
     background-color: #ffffff;
     font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 </style>
   
