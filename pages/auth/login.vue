@@ -7,22 +7,27 @@
                         <img src="https://pan.nuzn.cn/v1/download?path=/image/rust.jpg" alt="rust论坛">
                     </a>
                 </div>
-                <div class="login-content-user">
-                    <div class="input-control has-icon-left">
-                        <input id="inputAccountExampleUser" type="text" class="form-control" placeholder="用户名" value="">
-                        <label for="inputAccountExampleUser" class="input-control-icon-left"><i
-                                class="icon icon-user "></i></label>
+                <div class="login-content-Email">
+                    <div class="input-control has-icon-left input-group">
+                        <input id="inputPasswordExampleEmail" type="password" class="form-control" placeholder="邮箱"
+                            value="">
+                        <label for="inputPasswordExampleEmail" class="input-control-icon-left"><i
+                                class="icon icon-envelope"></i></label>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" @click="sendCode">发送验证码</button>
+                        </span>
                     </div>
                 </div>
                 <div class="login-content-pass">
                     <div class="input-control has-icon-left">
-                        <input id="inputPasswordExamplePass" type="password" class="form-control" placeholder="密码" value="">
+                        <input id="inputPasswordExamplePass" type="password" class="form-control" placeholder="验证码"
+                            value="">
                         <label for="inputPasswordExamplePass" class="input-control-icon-left"><i
                                 class="icon icon-key"></i></label>
                     </div>
                 </div>
                 <div class="login-content-submit">
-                    <button class="btn btn-block btn-primary" type="button">登录</button>
+                    <button class="btn btn-block btn-primary" type="button" @click="submit">登录</button>
                 </div>
             </div>
         </div>
@@ -30,6 +35,28 @@
 </template>
 
 <script setup lang="ts">
+
+const submit = async () => {
+    const { data: count } = await $fetch('/v1/rust/api/auth/login', {
+        method: "POST",
+        body: {
+            "email": "admin@dbsgw.cn",
+            "code": "b0978b03"
+        }
+    })
+    console.log("登录", count);
+}
+
+const sendCode = async () => {
+    const { data: count } = await $fetch('/v1/rust/api/auth/code', {
+        method: "POST",
+        body: {
+            "email": "admin@dbsgw.cn"
+        }
+    })
+    console.log("发送短信验证码", count);
+}
+
 definePageMeta({
     layout: false
 })

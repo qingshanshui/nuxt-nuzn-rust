@@ -9,28 +9,31 @@
                 </div>
                 <div class="login-content-user">
                     <div class="input-control has-icon-left">
-                        <input id="inputAccountExampleUser" type="text" class="form-control" placeholder="用户名" value="">
+                        <input id="inputAccountExampleUser" type="text" class="form-control" placeholder="昵称" value="">
                         <label for="inputAccountExampleUser" class="input-control-icon-left"><i
                                 class="icon icon-user "></i></label>
                     </div>
                 </div>
                 <div class="login-content-pass">
-                    <div class="input-control has-icon-left">
-                        <input id="inputPasswordExamplePass" type="password" class="form-control" placeholder="密码" value="">
+                    <div class="input-control has-icon-left input-group">
+                        <input id="inputPasswordExamplePass" type="password" class="form-control" placeholder="邮箱" value="">
                         <label for="inputPasswordExamplePass" class="input-control-icon-left"><i
-                                class="icon icon-key"></i></label>
+                                class="icon icon-envelope"></i></label>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" @click="sendCode">发送验证码</button>
+                        </span>
                     </div>
                 </div>
                 <div class="login-content-pass">
                     <div class="input-control has-icon-left">
-                        <input id="inputPasswordExamplePass2" type="password2" class="form-control" placeholder="确认密码"
+                        <input id="inputPasswordExamplePass2" type="password2" class="form-control" placeholder="验证码"
                             value="">
                         <label for="inputPasswordExamplePass2" class="input-control-icon-left"><i
                                 class="icon icon-key"></i></label>
                     </div>
                 </div>
                 <div class="login-content-submit">
-                    <button class="btn btn-block btn-primary" type="button">注册</button>
+                    <button class="btn btn-block btn-primary" type="button" @click="register">注册</button>
                 </div>
             </div>
         </div>
@@ -38,6 +41,26 @@
 </template>
 
 <script setup lang="ts">
+const register = async () => {
+    const { data: count } = await $fetch('/v1/rust/api/auth/register', {
+        method: "POST",
+        body: {
+            "email": "admin@dbsgw.cn",
+            "nickName": "刘洋",
+            "code": "a79ddb60"
+        }
+    })
+    console.log("注册");
+}
+const sendCode = async () => {
+    const { data: count } = await $fetch('/v1/rust/api/auth/code', {
+        method: "POST",
+        body: {
+            "email": "admin@dbsgw.cn"
+        }
+    })
+    console.log("发送短信验证码", count);
+}
 definePageMeta({
     layout: false
 })
