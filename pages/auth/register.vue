@@ -14,10 +14,10 @@
                                 class="icon icon-user "></i></label>
                     </div>
                 </div>
-                <div class="login-content-pass">
+                <div class="login-content-Email">
                     <div class="input-control has-icon-left input-group">
-                        <input id="inputPasswordExamplePass" type="password" class="form-control" placeholder="邮箱" value="">
-                        <label for="inputPasswordExamplePass" class="input-control-icon-left"><i
+                        <input id="inputPasswordExampleEmail" type="email" class="form-control" placeholder="邮箱" value="">
+                        <label for="inputPasswordExampleEmail" class="input-control-icon-left"><i
                                 class="icon icon-envelope"></i></label>
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" @click="sendCode">发送验证码</button>
@@ -26,9 +26,9 @@
                 </div>
                 <div class="login-content-pass">
                     <div class="input-control has-icon-left">
-                        <input id="inputPasswordExamplePass2" type="password2" class="form-control" placeholder="验证码"
+                        <input id="inputPasswordExamplePass" type="password" class="form-control" placeholder="验证码"
                             value="">
-                        <label for="inputPasswordExamplePass2" class="input-control-icon-left"><i
+                        <label for="inputPasswordExamplePass" class="input-control-icon-left"><i
                                 class="icon icon-key"></i></label>
                     </div>
                 </div>
@@ -42,24 +42,68 @@
 
 <script setup lang="ts">
 const register = async () => {
-    const { data: count } = await $fetch('/v1/rust/api/auth/register', {
+    // 效验参数
+    let user = $("#inputAccountExampleUser").val()
+    let email = $("#inputPasswordExampleEmail").val()
+    let pass = $("#inputPasswordExamplePass").val()
+    if (!user) return new $.zui.Messager('提示消息：昵称不能为空', {
+        type: 'warning'
+    }).show();
+    if (!email) return new $.zui.Messager('提示消息：邮箱不能为空', {
+        type: 'warning'
+    }).show();
+    if (!pass) return new $.zui.Messager('提示消息：验证码不能为空', {
+        type: 'warning'
+    }).show();
+
+
+    // 发送请求
+    const res: any = await $fetch('/v1/rust/api/auth/register', {
         method: "POST",
         body: {
-            "email": "admin@dbsgw.cn",
-            "nickName": "刘洋",
-            "code": "a79ddb60"
+            "email": email,
+            "code": pass,
+            "nickName": user,
         }
     })
+    if (res.code === 1000) {
+        new $.zui.Messager('提示消息：注册成功', {
+            type: 'success'
+        }).show();
+        setTimeout(() => {
+            location.href = "/auth/login"
+        }, 2000);
+    } else {
+        new $.zui.Messager(`提示消息：${res.data}`, {
+            type: 'warning'
+        }).show();
+    }
     console.log("注册");
 }
+// 发送短信验证码
 const sendCode = async () => {
-    const { data: count } = await $fetch('/v1/rust/api/auth/code', {
+    // 效验参数
+    let email = $("#inputPasswordExampleEmail").val()
+    if (!email) return new $.zui.Messager('提示消息：邮箱不能为空', {
+        type: 'warning'
+    }).show();
+    // 发送请求
+    const res: any = await $fetch('/v1/rust/api/auth/code', {
         method: "POST",
         body: {
-            "email": "admin@dbsgw.cn"
+            "email": email
         }
     })
-    console.log("发送短信验证码", count);
+    if (res.code === 1000) {
+        new $.zui.Messager('提示消息：验证码发送成功', {
+            type: 'success'
+        }).show();
+    } else {
+        new $.zui.Messager(`提示消息：${res.data}`, {
+            type: 'warning'
+        }).show();
+    }
+    console.log("发送短信验证码", res);
 }
 definePageMeta({
     layout: false

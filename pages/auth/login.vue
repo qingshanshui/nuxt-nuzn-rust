@@ -9,8 +9,7 @@
                 </div>
                 <div class="login-content-Email">
                     <div class="input-control has-icon-left input-group">
-                        <input id="inputPasswordExampleEmail" type="password" class="form-control" placeholder="邮箱"
-                            value="">
+                        <input id="inputPasswordExampleEmail" type="email" class="form-control" placeholder="邮箱" value="">
                         <label for="inputPasswordExampleEmail" class="input-control-icon-left"><i
                                 class="icon icon-envelope"></i></label>
                         <span class="input-group-btn">
@@ -35,26 +34,62 @@
 </template>
 
 <script setup lang="ts">
-
+// 登录
 const submit = async () => {
-    const { data: count } = await $fetch('/v1/rust/api/auth/login', {
+    // 效验参数
+    let email = $("#inputPasswordExampleEmail").val()
+    let pass = $("#inputPasswordExamplePass").val()
+    if (!email) return new $.zui.Messager('提示消息：邮箱不能为空', {
+        type: 'warning'
+    }).show();
+    if (!pass) return new $.zui.Messager('提示消息：验证码不能为空', {
+        type: 'warning'
+    }).show();
+    // 发送请求
+    const res: any = await $fetch('/v1/rust/api/auth/login', {
         method: "POST",
         body: {
-            "email": "admin@dbsgw.cn",
-            "code": "b0978b03"
+            "email": email,
+            "code": pass
         }
     })
-    console.log("登录", count);
+    if (res.code === 1000) {
+        new $.zui.Messager('提示消息：登录成功', {
+            type: 'success'
+        }).show();
+        localStorage.setItem("userinfo", JSON.stringify(res.data))
+        location.href = "/"
+    } else {
+        new $.zui.Messager(`提示消息：${res.data}`, {
+            type: 'warning'
+        }).show();
+    }
+    console.log("登录", res);
 }
-
+// 发送短信验证码
 const sendCode = async () => {
-    const { data: count } = await $fetch('/v1/rust/api/auth/code', {
+    // 效验参数
+    let email = $("#inputPasswordExampleEmail").val()
+    if (!email) return new $.zui.Messager('提示消息：邮箱不能为空', {
+        type: 'warning'
+    }).show();
+    // 发送请求
+    const res: any = await $fetch('/v1/rust/api/auth/code', {
         method: "POST",
         body: {
-            "email": "admin@dbsgw.cn"
+            "email": email
         }
     })
-    console.log("发送短信验证码", count);
+    if (res.code === 1000) {
+        new $.zui.Messager('提示消息：验证码发送成功', {
+            type: 'success'
+        }).show();
+    } else {
+        new $.zui.Messager(`提示消息：${res.data}`, {
+            type: 'warning'
+        }).show();
+    }
+    console.log("发送短信验证码", res);
 }
 
 definePageMeta({
