@@ -59,6 +59,7 @@ const register = async () => {
 
     // 发送请求
     const res: any = await $fetch('/v1/rust/api/auth/register', {
+        baseURL: utils.getBaseUrl(),
         method: "POST",
         body: {
             "email": email,
@@ -89,6 +90,7 @@ const sendCode = async () => {
     }).show();
     // 发送请求
     const res: any = await $fetch('/v1/rust/api/auth/code', {
+        baseURL: utils.getBaseUrl(),
         method: "POST",
         body: {
             "email": email

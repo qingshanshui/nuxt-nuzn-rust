@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="home-content">
-            <HomeItem :item="item" v-for="(item, index) in homeList.data.result" :key="index">
+            <HomeItem :item="item" v-for="(item, index) in homeList.data.data" :key="index">
             </HomeItem>
         </div>
         <div class="home-content-pagination">
@@ -16,9 +16,17 @@
 import { NPagination } from 'naive-ui'
 const route = useRoute()
 
-let { data: homeList } = await useAsyncData((pagesize) => $fetch(`https://rust.nuzn.cn/api/v1/article?size=16&page=${route.query.page}`, {
-    method: "GET"
+let { data: homeList } = await useAsyncData((pagesize) => $fetch(`/v1/rust/api/article/list`, {
+    method: "POST",
+    baseURL: utils.getBaseUrl(),
+    body: {
+        "size": 16,
+        "page": route.query.page
+    }
 }))
+
+console.log(homeList);
+
 
 const updateChange = (page) => {
     location.href = `?page=${page}`

@@ -47,6 +47,7 @@ const submit = async () => {
     }).show();
     // 发送请求
     const res: any = await $fetch('/v1/rust/api/auth/login', {
+        baseURL: utils.getBaseUrl(),
         method: "POST",
         body: {
             "email": email,
@@ -76,6 +77,7 @@ const sendCode = async () => {
     // 发送请求
     const res: any = await $fetch('/v1/rust/api/auth/code', {
         method: "POST",
+        baseURL: utils.getBaseUrl(),
         body: {
             "email": email
         }

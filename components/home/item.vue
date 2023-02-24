@@ -1,5 +1,5 @@
 <template>
-    <a :href="`articles/${props.item.article_uid}`">
+    <a :href="`articles/${props.item.articleUid}`">
         <div class="home-item">
             <div class="home-item-img">
                 <img src="https://rust.nuzn.cn/logo.jpg" alt="rust">

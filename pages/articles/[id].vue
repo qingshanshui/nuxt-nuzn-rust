@@ -47,9 +47,13 @@
 <script setup lang="ts">
 const route = useRoute()
 // 详情
-const { data: article } = await useAsyncData(() => $fetch(`https://rust.nuzn.cn/api/v1/article/${route.params.id}`, {
-    method: "GET"
+const { data: article } = await useAsyncData(() => $fetch(`/v1/rust/api/article/details/${route.params.id}`, {
+    method: "POST",
+    baseURL: utils.getBaseUrl(),
 }))
+
+console.log(article);
+
 // 评论
 
 const { data: commentList } = await useAsyncData(() => $fetch(`https://rust.nuzn.cn/api/v1/comment?articleID=${route.params.id}`, {
