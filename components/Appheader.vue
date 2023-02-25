@@ -12,7 +12,7 @@
             <div class="search hidden-xs">
                 <NInput round placeholder="搜索" />
             </div>
-            <div class="user ">
+            <div class="user " v-show="!isLogin">
                 <a href="/auth/login">
                     登录
                 </a>
@@ -20,13 +20,70 @@
                     注册
                 </a>
             </div>
+            <div class="user-login" v-show="isLogin">
+                <NDropdown :options="state.options" placement="bottom-end" :on-select="clickDropdown">
+                    <img src="http://openzui.com/docs/img/img2.jpg" width="33px" height="33px" class="img-circle"
+                        alt="圆形图片">
+                </NDropdown>
+            </div>
         </div>
     </header>
 </template>
 
 <script setup lang="ts">
-import { NInput } from 'naive-ui'
+import { NInput, NDropdown, NButton, NIcon } from 'naive-ui'
+let state = reactive({
+    options: [
+        {
+            label: '发帖子',
+            key: 'add',
+        },
+        {
+            label: '设置',
+            key: 'admin',
+        },
+        {
+            label: '退出登录',
+            key: 'logout',
+        }
+    ]
+})
 
+const userData = useInfo();
+
+const token = useToken()
+
+let isLogin = computed(() => {
+    console.log(token.value);
+    return !(token.value === null)
+})
+
+// 获取 Cookie
+const Cookies = useCookie('token')
+console.log(Cookies, "---------");
+
+
+
+
+let clickDropdown = (data: any) => {
+    console.log(data);
+
+    switch (data) {
+        case 'add':
+            location.href = "/admin/article/add"
+            break;
+        case 'admin':
+            location.href = "/admin"
+            break;
+        case 'logout':
+            localStorage.clear()
+            location.reload()
+            break;
+        default:
+            break;
+    }
+
+}
 </script>
   
 <style lang="scss" scoped>
@@ -58,6 +115,10 @@ import { NInput } from 'naive-ui'
         a:hover {
             color: #e8e8e8;
         }
+    }
+
+    .user-login {
+        padding-left: 10px;
     }
 }
 </style>
