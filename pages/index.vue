@@ -25,8 +25,6 @@ let { data: homeList } = await useAsyncData((pagesize) => $fetch(`/v1/rust/api/a
     }
 }))
 
-console.log(homeList);
-
 
 const updateChange = (page) => {
     location.href = `?page=${page}`

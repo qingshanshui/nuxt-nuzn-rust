@@ -13,7 +13,6 @@ onMounted(() => {
         placeholder: 'Type here...',
         onChange(editor) {
             const html = editor.getHtml()
-            console.log('editor content', html)
             // 也可以同步到 <textarea>
         }
     }

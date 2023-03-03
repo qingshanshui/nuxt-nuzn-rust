@@ -52,7 +52,6 @@ const { data: article } = await useAsyncData(() => $fetch(`/v1/rust/api/article/
     baseURL: utils.getBaseUrl(),
 }))
 
-console.log(article);
 
 // 评论
 
@@ -60,7 +59,6 @@ const { data: commentList } = await useAsyncData(() => $fetch(`https://rust.nuzn
     method: "GET"
 }))
 
-console.log(article);
 
 
 </script>

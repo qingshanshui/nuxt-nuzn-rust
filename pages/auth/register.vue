@@ -79,7 +79,6 @@ const register = async () => {
             type: 'warning'
         }).show();
     }
-    console.log("注册");
 }
 // 发送短信验证码
 const sendCode = async () => {
@@ -105,7 +104,6 @@ const sendCode = async () => {
             type: 'warning'
         }).show();
     }
-    console.log("发送短信验证码", res);
 }
 definePageMeta({
     layout: false

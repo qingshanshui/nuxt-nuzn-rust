@@ -59,8 +59,6 @@ let isLogin = computed(() => {
 })
 
 let clickDropdown = (data: any) => {
-    console.log(data);
-
     switch (data) {
         case 'add':
             location.href = "/admin/article/add"

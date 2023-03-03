@@ -68,7 +68,6 @@ const submit = async () => {
             type: 'warning'
         }).show();
     }
-    console.log("登录", res);
 }
 // 发送短信验证码
 const sendCode = async () => {
@@ -94,7 +93,6 @@ const sendCode = async () => {
             type: 'warning'
         }).show();
     }
-    console.log("发送短信验证码", res);
 }
 
 definePageMeta({
