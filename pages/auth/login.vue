@@ -58,7 +58,10 @@ const submit = async () => {
         new $.zui.Messager('提示消息：登录成功', {
             type: 'success'
         }).show();
-        localStorage.setItem("userinfo", JSON.stringify(res.data))
+        const token = useCookie("token", {
+            maxAge: 60 * 60 * 24 * 14
+        })
+        token.value = res.data
         location.href = "/"
     } else {
         new $.zui.Messager(`提示消息：${res.data}`, {

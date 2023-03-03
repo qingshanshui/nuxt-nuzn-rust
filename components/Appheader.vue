@@ -49,21 +49,9 @@ let state = reactive({
     ]
 })
 
-const userData = useInfo();
-
-const token = useToken()
-
 let isLogin = computed(() => {
-    console.log(token.value);
-    return !(token.value === null)
+    return (useCookie("token").value?.token)
 })
-
-// 获取 Cookie
-const Cookies = useCookie('token')
-console.log(Cookies, "---------");
-
-
-
 
 let clickDropdown = (data: any) => {
     console.log(data);
@@ -76,7 +64,7 @@ let clickDropdown = (data: any) => {
             location.href = "/admin"
             break;
         case 'logout':
-            localStorage.clear()
+            useCookie("token").value = null
             location.reload()
             break;
         default:
