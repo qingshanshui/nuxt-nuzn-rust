@@ -27,6 +27,7 @@ useHead(() => ({
         { type: 'text/javascript', src: 'https://pan.nuzn.cn/v1/download?path=/wangeditor/5.1.23/js/index.js' },
     ],
 }))
+
 </script>
 <style scoped>
 .main {

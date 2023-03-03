@@ -7,7 +7,8 @@
 <script setup lang="ts">
 import { NDataTable } from 'naive-ui'
 definePageMeta({
-    layout: 'admin'
+    layout: 'admin',
+    middleware: ['auth']
 })
 
 let state = reactive({

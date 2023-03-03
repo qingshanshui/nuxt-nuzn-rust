@@ -8,9 +8,7 @@
 </template>
 <script setup lang="ts">
 onMounted(() => {
-
     const { createEditor, createToolbar } = window.wangEditor
-
     const editorConfig = {
         placeholder: 'Type here...',
         onChange(editor) {
@@ -39,6 +37,7 @@ onMounted(() => {
 })
 
 definePageMeta({
-    layout: 'admin'
+    layout: 'admin',
+    middleware: ['auth']
 })
 </script>
