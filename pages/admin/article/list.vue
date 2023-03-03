@@ -6,10 +6,32 @@
 </template>
 <script setup lang="ts">
 import { NDataTable } from 'naive-ui'
+const route = useRoute()
 definePageMeta({
     layout: 'admin',
     middleware: ['auth']
 })
+
+onMounted(() => {
+    list()
+})
+
+
+const list = () => {
+    $fetch(`/v1/rust/api/admin/article/list`, {
+        method: "POST",
+        baseURL: utils.getBaseUrl(),
+        body: {
+            "size": 16,
+            "page": route.query.page
+        },
+        headers: {
+            'Authorization': useCookie("token").value.token
+        }
+    }).then((res) => {
+        console.log(res, '---');
+    })
+}
 
 let state = reactive({
     columns: [
