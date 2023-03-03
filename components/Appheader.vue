@@ -12,7 +12,7 @@
             <div class="search hidden-xs">
                 <NInput round placeholder="搜索" />
             </div>
-            <div class="user " v-show="!isLogin">
+            <div class="user " v-if="!isLogin">
                 <a href="/auth/login">
                     登录
                 </a>
@@ -20,11 +20,16 @@
                     注册
                 </a>
             </div>
-            <div class="user-login" v-show="isLogin">
-                <NDropdown :options="state.options" placement="bottom-end" :on-select="clickDropdown">
-                    <img src="http://openzui.com/docs/img/img2.jpg" width="33px" height="33px" class="img-circle"
-                        alt="圆形图片">
-                </NDropdown>
+            <div class="user-login" v-else="isLogin">
+                <div class="btn-group dropdown-hover">
+                    <img src="http://openzui.com/docs/img/img2.jpg" data-toggle="dropdown" width="33px" height="33px"
+                        class="img-circle" alt="圆形图片">
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="###" @click="clickDropdown('add')">发帖子</a></li>
+                        <li><a href="###" @click="clickDropdown('admin')">设置</a></li>
+                        <li><a href="###" @click="clickDropdown('logout')">推出</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
@@ -107,6 +112,10 @@ let clickDropdown = (data: any) => {
 
     .user-login {
         padding-left: 10px;
+    }
+
+    .dropdown-menu {
+        min-width: auto;
     }
 }
 </style>
