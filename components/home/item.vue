@@ -7,7 +7,7 @@
             <div class="home-item-title">
                 {{ props.item.title }}
             </div>
-            <div class="home-item-datetime">10月前</div>
+            <div class="home-item-datetime">{{ props.item.CreatedAt }}</div>
         </div>
     </a>
 </template>
@@ -39,9 +39,8 @@ const props = defineProps({
         flex: 1;
         margin: 0 10px;
         overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         color: #000000;
         font-weight: 500;
     }
