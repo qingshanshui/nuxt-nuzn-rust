@@ -1,11 +1,10 @@
 <template>
     <div class="n">
-        <NDataTable :bordered="false" :single-line="false" :columns="state.columns" :data="state.data"
-            :pagination="state.pagination" />
+        <NDataTable :bordered="false" :columns="state.columns" :data="state.data" :pagination="state.pagination" />
     </div>
 </template>
 <script setup lang="ts">
-import { NDataTable } from 'naive-ui'
+import { NDataTable, NButton } from 'naive-ui'
 const route = useRoute()
 definePageMeta({
     layout: 'admin',
@@ -16,20 +15,12 @@ onMounted(() => {
     list()
 })
 
-
 const list = () => {
-    $fetch(`/v1/rust/api/admin/article/list`, {
-        method: "POST",
-        baseURL: utils.getBaseUrl(),
-        body: {
-            "size": 16,
-            "page": route.query.page
-        },
-        headers: {
-            'Authorization': useCookie("token").value.token
-        }
-    }).then((res) => {
-        console.log(res, '---');
+    useHttp.post('/admin/article/list', {
+        "size": 16,
+        "page": route.query.page
+    }).then((res: any) => {
+        state.data = res.data.data
     })
 }
 
@@ -37,42 +28,62 @@ let state = reactive({
     columns: [
         {
             title: '文章名称',
-            key: 'name'
+            key: 'title'
         },
         {
             title: '查看数量',
-            key: 'age'
+            key: 'hot'
         },
         {
             title: '操作',
-            key: 'address'
-        }
+            width: 1,
+            titleColSpan: 2,
+            render(row) {
+                return h(
+                    NButton,
+                    {
+                        strong: true,
+                        size: 'small',
+                        type: "primary",
+                        onClick: () => edit(row),
+                    },
+                    { default: () => '编辑' },
+                )
+            }
+        },
+        {
+            title: '',
+            width: 1,
+            render(row) {
+                return h(
+                    NButton,
+                    {
+                        strong: true,
+                        size: 'small',
+                        type: "error",
+                        onClick: () => del(row),
+                    },
+                    { default: () => '删除' },
+                )
+            }
+        },
     ],
     data: [
-        {
-            key: 0,
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-            tags: ['nice', 'developer']
-        },
-        {
-            key: 1,
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-            tags: ['wow']
-        },
-        {
-            key: 2,
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher']
-        }
     ],
     pagination: {
         pageSize: 10
     }
 })
+
+// 编辑文章
+const edit = (row: any) => {
+    console.log(row);
+}
+
+// 删除文章
+const del = (row: any) => {
+    useHttp.post('/admin/article/del', { id: row.articleUid }).then((res: any) => {
+        list()
+    })
+}
 </script>

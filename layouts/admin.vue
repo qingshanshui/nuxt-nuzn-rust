@@ -37,6 +37,7 @@ useHead(() => ({
 .content {
     flex: 1;
     padding: 10px 0;
+    overflow: hidden;
 }
 
 .aside {

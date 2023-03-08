@@ -29,6 +29,7 @@ import { NScrollbar } from 'naive-ui'
 .content {
     flex: 1;
     padding: 10px 0;
+    overflow: hidden;
 }
 
 .aside {
