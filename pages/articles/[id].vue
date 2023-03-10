@@ -5,16 +5,16 @@
         </h2>
         <div class="other-info">
             <span>
-                {{ 'admin' }}
-            </span>
-            <time>
-                {{ '10天前' }}
-            </time>
-            <span>
-                12245
+                {{ '新用户' }}
             </span>
             <span>
-                留言
+                {{ moment(article.data.CreatedAt).format("YYYY-MM-DD") }}
+            </span>
+            <span>
+                {{ article.data.hot }}
+            </span>
+            <span>
+                rust
             </span>
         </div>
         <div ref="articleContent" class="content-details" v-html="article.data.content">
@@ -45,12 +45,16 @@
     </div>
 </template>
 <script setup lang="ts">
+import moment from 'moment'
 const route = useRoute()
 // 详情
 const { data: article } = await useAsyncData(() => $fetch(`/v1/rust/api/article/details/${route.params.id}`, {
     method: "POST",
     baseURL: utils.getBaseUrl(),
 }))
+
+console.log(article);
+
 
 // 评论
 let commentList = {

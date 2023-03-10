@@ -4,9 +4,9 @@
             <NInput v-model:value="state.title" type="text" placeholder="文章标题" />
         </div>
         <div class="add-editor n">
-            <div id="editor—wrapper" style="min-height: 500px;">
+            <div id="editor—wrapper">
                 <div id="toolbar-container"><!-- 工具栏 --></div>
-                <div id="editor-container"><!-- 编辑器 --></div>
+                <div id="editor-container" style="height: 300px;"><!-- 编辑器 --></div>
             </div>
         </div>
         <div class="add-button">
