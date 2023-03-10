@@ -13,12 +13,22 @@
                         <label for="inputPasswordExampleEmail" class="input-control-icon-left"><i
                                 class="icon icon-envelope"></i></label>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" @click="sendCode">发送验证码</button>
+                            <template v-if="state.sendCodeTime == 0">
+                                <button class="btn btn-default" type="button" @click="sendCode" v-if="!state.show">
+                                    发送验证码
+                                </button>
+                                <button class="btn btn-default load-indicator loading" type="button" disabled v-else>
+                                    发送中
+                                </button>
+                            </template>
+                            <button class="btn btn-default" type="button" disabled v-else>
+                                {{ state.sendCodeTime }}秒后可重发</button>
                         </span>
                     </div>
                 </div>
                 <div class="login-content-pass">
                     <div class="input-control has-icon-left">
+
                         <input id="inputPasswordExamplePass" type="password" class="form-control" placeholder="验证码"
                             value="">
                         <label for="inputPasswordExamplePass" class="input-control-icon-left"><i
@@ -34,6 +44,10 @@
 </template>
 
 <script setup lang="ts">
+const state = reactive({
+    sendCodeTime: 0,// 短信倒计时
+    show: false,// 发送中
+})
 // 登录
 const submit = async () => {
     // 效验参数
@@ -76,6 +90,7 @@ const sendCode = async () => {
     if (!email) return new $.zui.Messager('提示消息：邮箱不能为空', {
         type: 'warning'
     }).show();
+    state.show = true
     // 发送请求
     const res: any = await $fetch('/v1/rust/api/auth/code', {
         method: "POST",
@@ -88,6 +103,14 @@ const sendCode = async () => {
         new $.zui.Messager('提示消息：验证码发送成功', {
             type: 'success'
         }).show();
+        state.sendCodeTime = 60
+        let sendCodeTimer = setInterval(() => {
+            state.sendCodeTime = state.sendCodeTime - 1
+            if (state.sendCodeTime === 0) {
+                clearInterval(sendCodeTimer)
+                state.show = false
+            }
+        }, 1000)
     } else {
         new $.zui.Messager(`提示消息：${res.data}`, {
             type: 'warning'
