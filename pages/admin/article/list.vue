@@ -6,6 +6,7 @@
 <script setup lang="ts">
 import { NDataTable, NButton } from 'naive-ui'
 const route = useRoute()
+const router = useRouter()
 definePageMeta({
     layout: 'admin',
     middleware: ['auth']
@@ -78,6 +79,7 @@ let state = reactive({
 // 编辑文章
 const edit = (row: any) => {
     console.log(row);
+    router.push({ path: '/admin/article/edit', query: row })
 }
 
 // 删除文章
