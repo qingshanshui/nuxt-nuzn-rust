@@ -21,9 +21,11 @@ let { data: homeList } = await useAsyncData((pagesize) => $fetch(`/v1/rust/api/a
     baseURL: utils.getBaseUrl(),
     body: {
         "size": 16,
-        "page": route.query.page
+        "page": parseInt(route.query.page)
     }
 }))
+console.log(homeList);
+
 
 
 const updateChange = (page) => {

@@ -7,11 +7,12 @@
             <div class="home-item-title">
                 {{ props.item.title }}
             </div>
-            <div class="home-item-datetime">{{ props.item.CreatedAt }}</div>
+            <div class="home-item-datetime">{{ moment(props.item.CreatedAt).format("YYYY-MM-DD") }}</div>
         </div>
     </a>
 </template>
 <script setup lang="ts">
+import moment from 'moment'
 // props
 const props = defineProps({
     item: {

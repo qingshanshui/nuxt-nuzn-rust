@@ -28,7 +28,6 @@
                 </div>
                 <div class="login-content-pass">
                     <div class="input-control has-icon-left">
-
                         <input id="inputPasswordExamplePass" type="password" class="form-control" placeholder="验证码"
                             value="">
                         <label for="inputPasswordExamplePass" class="input-control-icon-left"><i
@@ -115,6 +114,7 @@ const sendCode = async () => {
         new $.zui.Messager(`提示消息：${res.data}`, {
             type: 'warning'
         }).show();
+        state.show = true
     }
 }
 

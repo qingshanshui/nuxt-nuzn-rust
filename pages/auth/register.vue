@@ -125,6 +125,7 @@ const sendCode = async () => {
         new $.zui.Messager(`提示消息：${res.data}`, {
             type: 'warning'
         }).show();
+        state.show = true
     }
 }
 definePageMeta({
