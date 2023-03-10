@@ -52,15 +52,15 @@ const { data: article } = await useAsyncData(() => $fetch(`/v1/rust/api/article/
     baseURL: utils.getBaseUrl(),
 }))
 
-
 // 评论
-
-const { data: commentList } = await useAsyncData(() => $fetch(`https://rust.nuzn.cn/api/v1/comment?articleID=${route.params.id}`, {
-    method: "GET"
-}))
-
-
-
+let commentList = {
+    data: {
+        result: []
+    }
+}
+// const { data: commentList } = await useAsyncData(() => $fetch(`https://rust.nuzn.cn/api/v1/comment?articleID=${route.params.id}`, {
+//     method: "GET"
+// }))
 </script>
 
 <style scoped lang="scss">

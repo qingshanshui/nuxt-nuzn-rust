@@ -2,7 +2,7 @@
     <a :href="`articles/${props.item.articleUid}`">
         <div class="home-item">
             <div class="home-item-img">
-                <img src="https://rust.nuzn.cn/logo.jpg" alt="rust">
+                <img src="https://pan.nuzn.cn/v1/download?path=/image/rust.jpg" alt="rust">
             </div>
             <div class="home-item-title">
                 {{ props.item.title }}

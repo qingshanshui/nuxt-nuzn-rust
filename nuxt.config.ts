@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
+            title: "rust中文网",
             link: [
                 { rel: 'stylesheet', href: "https://pan.nuzn.cn/v1/download?path=/zui/1.10.0/css/zui.min.css" },
                 { rel: 'icon', type: 'image/x-icon', href: 'https://pan.nuzn.cn/v1/download?path=/image/favicon.ico' },
